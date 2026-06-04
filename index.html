@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спам Лєночкі</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff1493, #00bfff, #ff00ff);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+            height: 100vh;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .center-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2.5rem, 8vw, 7rem);
+            font-weight: bold;
+            color: white;
+            text-shadow: 
+                0 0 20px rgba(255, 20, 147, 0.9),
+                0 0 40px rgba(0, 191, 255, 0.8);
+            z-index: 100;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .spam-img {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s linear forwards;
+            opacity: 0.9;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="center-text">Спам Лєночкі</h1>
+
+    <script>
+        const imageUrl = "./assets/images/image.webp";
+
+        function createSpamImage() {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.classList.add('spam-img');
+
+            const size = Math.random() * 80 + 70;
+            img.style.width = `${size}px`;
+            img.style.height = `${size}px`;
+
+            const left = Math.random() * 100;
+            img.style.left = `${left}vw`;
+
+            const duration = Math.random() * 3 + 3.5;
+            img.style.animationDuration = `${duration}s`;
+
+            img.style.animationDelay = `-${Math.random() * 2}s`;
+
+            document.body.appendChild(img);
+
+            setTimeout(() => {
+                img.remove();
+            }, (duration + 1) * 1000);
+        }
+
+        setInterval(createSpamImage, 20); 
+
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => {
+                createSpamImage();
+            }, i * 40);
+        }
+    </script>
+
+</body>
+</html>
